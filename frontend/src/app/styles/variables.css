@@ -1,8 +1,14 @@
 :root {
+  --bg-color: #f4f4f6;
+
   --card-text-size: 16px;
   --card-text-color: #000000D9;
+  --text-secondary: #848388;
   --card-secondary-text-size: 14px;
   --card-secondary-text-color: #00000073;
   --light-orange: #F9F1E6;
   --orange: #FAAD14;
+
+  --active-view: #1890FF;
+  --deactivated-view: rgba(0, 0, 0, 0.85);
 }

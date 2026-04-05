@@ -1,0 +1,46 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 24px 0 8px;
+    flex-wrap: wrap;
+}
+
+.pagination__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    border: 1.5px solid #d9d9d9;
+    border-radius: 6px;
+    background: #ffffff;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--card-text-color);
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    line-height: 1;
+    user-select: none;
+}
+
+.pagination__btn:hover:not(:disabled):not(.pagination__btn--active) {
+    border-color: var(--active-view);
+    color: var(--active-view);
+}
+
+.pagination__btn:disabled {
+    color: #bfbfbf;
+    border-color: #e8e8e8;
+    background: #fafafa;
+    cursor: not-allowed;
+}
+
+.pagination__btn--active {
+    border-color: var(--active-view);
+    color: var(--active-view);
+    font-weight: 600;
+    cursor: default;
+}

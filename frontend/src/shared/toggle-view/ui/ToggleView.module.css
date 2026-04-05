@@ -1,0 +1,24 @@
+.toggleView {
+  display: flex;
+  gap: 8px;
+  background-color: var(--bg-color);
+  width: fit-content;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.separator {
+  width: 2px;
+  background-color: white;
+  border-radius: 1px;
+}
+
+.button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.active .icon path {
+  fill: var(--active-view);
+}

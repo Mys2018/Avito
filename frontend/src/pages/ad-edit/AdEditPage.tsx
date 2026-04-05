@@ -1,14 +1,27 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useAdById } from "@/entities/ad/api/queries";
+import { AdForm } from "@/widgets/ad-form";
+import styles from "./AdEditPage.module.css";
 
 const AdEditPage = () => {
-  const params = useParams()
-  const navigate = useNavigate()
-  return (
-      <section>
-        <h1>Редактирование объявление {params.id}</h1>
-        <button onClick={() => navigate(-1)}>Назад</button>
-      </section>
-  )
-}
+  const { id } = useParams<{ id: string }>();
 
-export default AdEditPage
+  const { data: ad, isLoading, isError } = useAdById(id || "");
+
+  if (isLoading) {
+    return <div className={styles.container}>Загрузка данных для редактирования...</div>;
+  }
+
+  if (isError || !ad) {
+    return <div className={styles.container}>Не удалось загрузить объявление для редактирования.</div>;
+  }
+
+  return (
+    <section className={styles.container}>
+      <h1 className={styles.title}>Редактирование объявления</h1>
+      <AdForm adId={id!} initialData={ad} />
+    </section>
+  );
+};
+
+export default AdEditPage;
