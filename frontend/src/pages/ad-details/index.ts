@@ -1,0 +1,1 @@
+export { default as AdDetailsPage } from './AdDetailsPage.tsx'
