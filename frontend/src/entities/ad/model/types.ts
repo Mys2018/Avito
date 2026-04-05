@@ -50,6 +50,8 @@ export interface ItemsGetOut {
     category: AdCategory;
     title: string;
     price: number;
+    description?: string;
+    params?: AdParams;
     needsRevision: boolean;
   }>;
   total: number;
@@ -62,7 +64,6 @@ export interface ItemUpdateIn {
   price: number;
   params: AutoItemParams | RealEstateItemParams | ElectronicsItemParams;
 }
-
 
 export interface FetchAdsParams {
   q?: string;

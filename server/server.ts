@@ -3,7 +3,7 @@ import Fastify from 'fastify';
 import items from 'data/items.json' with { type: 'json' };
 import { Item } from 'src/types.ts';
 import { ItemsGetInQuerySchema, ItemUpdateInSchema } from 'src/validation.ts';
-import { treeifyError, ZodError } from 'zod';
+import { ZodError } from 'zod';
 import { doesItemNeedRevision } from './src/utils.ts';
 
 const ITEMS = items as Item[];
@@ -14,14 +14,23 @@ const fastify = Fastify({
 
 await fastify.register((await import('@fastify/middie')).default);
 
-// Искуственная задержка ответов, чтобы можно было протестировать состояния загрузки
+
 fastify.use((_, __, next) =>
   new Promise(res => setTimeout(res, 300 + Math.random() * 700)).then(next),
 );
 
-// Настройка CORS
-fastify.use((_, reply, next) => {
+
+fastify.use((req, reply, next) => {
   reply.setHeader('Access-Control-Allow-Origin', '*');
+  reply.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  reply.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    reply.statusCode = 200;
+    reply.end();
+    return;
+  }
+
   next();
 });
 
@@ -105,9 +114,12 @@ fastify.get<ItemsGetRequest>('/items', request => {
       })
       .slice(skip, skip + limit)
       .map(item => ({
+        id: item.id,
         category: item.category,
         title: item.title,
         price: item.price,
+        description: item.description,
+        params: item.params,
         needsRevision: doesItemNeedRevision(item),
       })),
     total: filteredItems.length,
@@ -155,7 +167,7 @@ fastify.put<ItemUpdateRequest>('/items/:id', (request, reply) => {
     return { success: true };
   } catch (error) {
     if (error instanceof ZodError) {
-      reply.status(400).send({ success: false, error: treeifyError(error) });
+      reply.status(400).send({ success: false, error: error.format() });
       return;
     }
 

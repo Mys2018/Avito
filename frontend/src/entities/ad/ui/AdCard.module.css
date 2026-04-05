@@ -7,9 +7,12 @@
   border-radius: 16px;
   overflow: hidden;
   height: 100%;
+  text-decoration: none;
+  color: inherit;
+  background-color: white;
 }
 
-.card:hover{
+.card:hover {
   cursor: pointer;
 }
 
@@ -69,7 +72,8 @@
   align-items: center;
   background-color: var(--light-orange);
   color: var(--orange);
-  border-radius: 8px;  padding: 2px 8px;
+  border-radius: 8px;
+  padding: 2px 8px;
   width: fit-content;
   font-size: 14px;
 }

@@ -1,0 +1,13 @@
+.sortContainer {
+    background-color: var(--bg-color);
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.sortSelect {
+    font-size: 14px;
+    border: none;
+    background-color: white;
+    border-radius: 4px;
+    padding: 4px;
+}
