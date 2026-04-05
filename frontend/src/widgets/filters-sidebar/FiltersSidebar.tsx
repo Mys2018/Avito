@@ -1,7 +1,6 @@
 const FiltersSidebar = () => {
   return(
       <div>
-
       </div>
   )
 }
