@@ -1,0 +1,1 @@
+export { default as AdEditPage } from './AdEditPage.tsx'
